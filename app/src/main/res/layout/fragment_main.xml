@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     android:id="@+id/coordinator_container"
+                                                     android:fitsSystemWindows="true"
+                                                     android:orientation="vertical">
+
+
+    <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent"
+                                                     android:layout_height="wrap_content"
+                                                     android:fitsSystemWindows="true">
+        <com.google.android.material.appbar.CollapsingToolbarLayout android:layout_width="match_parent"
+                                                                    android:layout_height="match_parent"
+                                                                    android:fitsSystemWindows="true"
+                                                                    app:expandedTitleMarginEnd="64dp"
+                                                                    app:expandedTitleMarginStart="48dp"
+                                                                    app:layout_scrollFlags="scroll|enterAlways">
+
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+                                                                   android:layout_margin="8dp" android:padding="4dp"
+                                                                   android:background="@android:color/white"
+                                                                   android:hint="@string/search_placeholder"
+                                                                   android:layout_height="wrap_content">
+                <EditText
+                        android:id="@+id/edit_text_query"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@android:color/transparent"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_images"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_height="wrap_content"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

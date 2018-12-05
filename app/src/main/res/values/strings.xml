@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Shutterstock Search</string>
+    <string name="search_placeholder">Search a thing…</string>
+    <string name="button_retry">Retry</string>
+    <string name="title_activity_preview">Preview</string>
+
+    <string name="transition_preview">preview</string>
+
+    <string name="error_message_unknown">An unknown error has occurred</string>
+    <string name="error_no_internet">There is no internet connection</string>
+</resources>

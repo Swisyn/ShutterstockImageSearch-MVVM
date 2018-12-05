@@ -1,0 +1,92 @@
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 0
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.cuneytayyildiz.shutterstockassignment"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            useProguard true
+            debuggable false
+            buildConfigField 'String', 'API_END_POINT', API_END_POINT
+            buildConfigField 'String', 'API_CONSUMER_KEY', API_CONSUMER_KEY
+            buildConfigField 'String', 'API_CONSUMER_SECRET', API_CONSUMER_SECRET
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            useProguard false
+            debuggable true
+            buildConfigField 'String', 'API_END_POINT', API_END_POINT
+            buildConfigField 'String', 'API_CONSUMER_KEY', API_CONSUMER_KEY
+            buildConfigField 'String', 'API_CONSUMER_SECRET', API_CONSUMER_SECRET
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+kapt {
+    generateStubs = true
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.kotlin
+    implementation deps.androidX.coreKtx
+
+    implementation deps.androidX.appcompat
+    implementation deps.androidX.recyclerview
+    implementation deps.androidX.cardview
+    implementation deps.androidX.material
+
+    implementation deps.constraintLayout
+
+    implementation deps.rx.core
+    implementation deps.rx.android
+
+    implementation deps.lifecycle.commonJava8
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.viewmodel
+
+    implementation deps.picasso
+    
+    implementation deps.retrofit.core
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.rxjava
+
+    implementation deps.okhttp.core
+    implementation deps.okhttp.logger
+
+    implementation deps.dagger.core
+    implementation deps.dagger.android
+    kapt deps.dagger.compiler
+    kapt deps.dagger.processor
+
+
+
+}
