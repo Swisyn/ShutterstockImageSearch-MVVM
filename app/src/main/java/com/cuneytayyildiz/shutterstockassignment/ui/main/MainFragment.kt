@@ -17,7 +17,7 @@ import com.cuneytayyildiz.shutterstockassignment.ShutterstockApp
 import com.cuneytayyildiz.shutterstockassignment.data.model.Resource
 import com.cuneytayyildiz.shutterstockassignment.data.model.SearchResultModel
 import com.cuneytayyildiz.shutterstockassignment.ui.preview.PreviewActivity
-import com.cuneytayyildiz.shutterstockassignment.utils.EndlessRecyclerViewScrollListener
+import com.cuneytayyildiz.shutterstockassignment.utils.InfiniteScrollListener
 import com.cuneytayyildiz.shutterstockassignment.utils.extensions.isConnectedToInternet
 import com.cuneytayyildiz.shutterstockassignment.utils.extensions.onDoneAction
 import com.cuneytayyildiz.shutterstockassignment.utils.extensions.snack
@@ -33,7 +33,7 @@ class MainFragment : Fragment(), MainListItemClickListener {
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainListAdapter: MainListAdapter
-    private lateinit var endlessRecyclerViewScrollListener: EndlessRecyclerViewScrollListener
+    private lateinit var infiniteScrollListener: InfiniteScrollListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_main, container, false)
@@ -81,7 +81,7 @@ class MainFragment : Fragment(), MainListItemClickListener {
     private fun clearPreviousSearchResults() {
         if (::mainListAdapter.isInitialized) {
             mainListAdapter.items.clear()
-            endlessRecyclerViewScrollListener.resetState()
+            infiniteScrollListener.resetState()
         }
     }
 
@@ -105,14 +105,14 @@ class MainFragment : Fragment(), MainListItemClickListener {
     private fun setupRecyclerView() {
         recyclerViewImages.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            endlessRecyclerViewScrollListener = object :
-                    EndlessRecyclerViewScrollListener(recyclerViewImages.layoutManager as StaggeredGridLayoutManager) {
+            infiniteScrollListener = object :
+                    InfiniteScrollListener(recyclerViewImages.layoutManager as StaggeredGridLayoutManager) {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                     doSearch(editTextQuery.text.toString(), page)
                 }
             }
 
-            addOnScrollListener(endlessRecyclerViewScrollListener)
+            addOnScrollListener(infiniteScrollListener)
         }
     }
 
